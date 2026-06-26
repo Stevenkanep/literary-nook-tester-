@@ -1,37 +1,31 @@
 /* ================================================================
    The Literary Nook — Main Stylesheet
    File: css/styles.css
-   
-   Design inspired by Fully Booked (fullybookedonline.com):
-   - Brand color: #E84B1A (orange-red)
-   - Clean sans-serif typography (Montserrat + Lato)
-   - White/light grey backgrounds with strong orange accents
+ 
+   - Brand colors: Forest and moss greens (#3E6B3A, #2F4D2B) with parchment and stone neutrals
+   - Typography: Whimsical book‑inspired fonts (Cinzel Decorative + Quicksand)
+   - Backgrounds: Soft parchment and moss with earthy accents
    
    NOTE: This is the base stylesheet. As more pages are added,
    consider splitting into separate files (header.css, books.css, etc.)
    ================================================================ */
 
 
-/* ---------------------------------------------------------------
-   CSS CUSTOM PROPERTIES (DESIGN TOKENS)
-   Central place to manage the brand's colors, fonts, and spacing.
-   Change a value here and it updates everywhere on the site.
-   --------------------------------------------------------------- */
 :root {
     /* Brand colors */
-    --color-primary:       #E84B1A;   /* Main orange-red — buttons, nav, accents */
-    --color-primary-dark:  #C73E14;   /* Darker orange — hover states */
-    --color-dark:          #1A1A1A;   /* Near-black — footer, dark elements */
-    --color-text:          #333333;   /* Main body text */
-    --color-text-light:    #666666;   /* Subtitles, secondary text */
-    --color-border:        #E0E0E0;   /* Borders, dividers */
-    --color-bg:            #FFFFFF;   /* Page background */
-    --color-bg-soft:       #F7F7F7;   /* Light grey sections */
-    --color-success:       #28a745;   /* Confirmation / success feedback */
+    --color-primary:       #3E6B3A;   /* Forest green — buttons, nav, accents */
+    --color-primary-dark:  #2F4D2B;   /* Deep pine — hover states */
+    --color-dark:          #1F1F1F;   /* Charcoal soil — footer, dark elements */
+    --color-text:          #2E2E2E;   /* Dark slate — main body text */
+    --color-text-light:    #5A5A5A;   /* Weathered stone — subtitles, secondary text */
+    --color-border:        #C8D2C0;   /* Sage grey-green — borders, dividers */
+    --color-bg:            #F9FAF7;   /* Soft parchment — page background */
+    --color-bg-soft:       #EEF2EB;   /* Misty moss — light sections */
+    --color-success:       #4C9A57;   /* Vibrant leaf — confirmation / success feedback */
 
     /* Typography */
-    --font-heading: 'Montserrat', sans-serif;  /* All headings and nav */
-    --font-body:    'Lato', sans-serif;        /* Body copy and labels */
+    --font-heading: 'Cinzel Decorative', serif;   /* Elegant, classic headings */
+    --font-body:    'Quicksand', sans-serif;      /* Rounded, friendly body text */
 
     /* Spacing */
     --space-xs:   4px;
@@ -392,7 +386,7 @@ button {
 .hero {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(120deg, #3a2060 0%, #e84b1a 60%, #f7c873 100%);
+    background: linear-gradient(120deg, #4b1e1e 0%, #7a2e2e 60%, #b85c38 100%);
     /* PLACEHOLDER: Replace gradient with background-image once banner images are ready */
     min-height: 400px;
 }
