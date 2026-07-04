@@ -868,6 +868,394 @@ button {
     }
 }
 
+/* ================================================================
+   AUTH PAGES — login.php and register.php
+   Shared styles for the login and registration pages.
+   ================================================================ */
+
+/* ---------------------------------------------------------------
+   AUTH WRAPPER
+   Full-height centered container that sits between header and footer.
+   Used on both login.php and register.php.
+   --------------------------------------------------------------- */
+.auth-wrapper {
+    background: var(--color-bg-soft);
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-lg);
+}
+
+/* ---------------------------------------------------------------
+   AUTH CARD — login.php
+   Two-column split card: left = returning customers, right = new customers.
+   --------------------------------------------------------------- */
+.auth-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 860px;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Each column inside the auth card */
+.auth-col {
+    padding: 52px 48px;
+}
+
+/* Divider line between the two columns */
+.auth-col:first-child {
+    border-right: 1px solid var(--color-border);
+}
+
+/* Column heading (e.g. "Returning Customers") */
+.auth-col__title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+}
+
+/* Instruction text below the column heading */
+.auth-col__subtitle {
+    font-size: 13px;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-lg);
+    line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------
+   AUTH NOTICE BOX
+   Soft info banner inside the login form column.
+   Example: "Reset your password to log in on the new site."
+   --------------------------------------------------------------- */
+.auth-notice {
+    background: var(--color-bg-soft);
+    border-left: 3px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--color-text);
+    margin-bottom: var(--space-lg);
+    line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------
+   FORM ELEMENTS
+   Shared input labels, fields, and hints used on login and register.
+   --------------------------------------------------------------- */
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+.form-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 6px;
+}
+
+/* Red asterisk for required fields */
+.form-label .required {
+    color: var(--color-primary);
+    margin-left: 2px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text);
+    background: var(--color-bg);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(62, 107, 58, 0.12);
+}
+
+/* Small helper text below an input (e.g. password requirements) */
+.form-hint {
+    font-size: 11px;
+    color: var(--color-text-light);
+    margin-top: 5px;
+}
+
+/* Two-column side-by-side field layout (e.g. First Name / Last Name) */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+/* ---------------------------------------------------------------
+   PASSWORD FIELD WITH SHOW/HIDE TOGGLE
+   Wraps the input and positions the eye icon button inside it.
+   --------------------------------------------------------------- */
+.input-password-wrap {
+    position: relative;
+}
+
+.input-password-wrap .form-input {
+    padding-right: 44px; /* room for the eye icon */
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-text-light);
+    cursor: pointer;
+    font-size: 15px;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.password-toggle:hover {
+    color: var(--color-primary);
+}
+
+/* ---------------------------------------------------------------
+   FORM FEEDBACK MESSAGES
+   Shown after form submission — red for errors, green for success.
+   --------------------------------------------------------------- */
+.form-message {
+    padding: 11px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    margin-bottom: var(--space-md);
+    font-weight: 500;
+}
+
+.form-message--error {
+    background: #fdecea;
+    color: #b71c1c;
+    border: 1px solid #f5c6cb;
+}
+
+.form-message--success {
+    background: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #c3e6cb;
+}
+
+/* ---------------------------------------------------------------
+   LOGIN FORM ACTIONS ROW
+   Login button on the left, Forgot Password link on the right.
+   --------------------------------------------------------------- */
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-lg);
+    gap: var(--space-md);
+}
+
+/* Forgot password link style */
+.forgot-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary);
+    transition: color 0.2s;
+}
+
+.forgot-link:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------
+   NEW CUSTOMERS COLUMN — login.php right side
+   Benefits checklist and Create Account CTA.
+   --------------------------------------------------------------- */
+.auth-col--new {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* List of account benefits shown to new visitors */
+.new-customer-benefits {
+    list-style: none;
+    margin-bottom: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.new-customer-benefits li {
+    font-size: 13px;
+    color: var(--color-text-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Green checkmark icon next to each benefit item */
+.new-customer-benefits li i {
+    color: var(--color-primary);
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+/* ================================================================
+   REGISTER PAGE — register.php
+   Single centered card with three form sections.
+   ================================================================ */
+
+/* register.php wrapper overrides center-align to flex-start so
+   the card sits at the top on long pages rather than dead center */
+.auth-wrapper--register {
+    align-items: flex-start;
+}
+
+/* The main registration card */
+.register-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    max-width: 720px;
+    width: 100%;
+    padding: 52px 56px;
+}
+
+/* Page heading inside the card */
+.register-card__title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+}
+
+.register-card__subtitle {
+    font-size: 13px;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-xl);
+}
+
+/* Section divider labels inside the form (e.g. "Personal Information") */
+.form-section-title {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    border-bottom: 1.5px solid var(--color-border);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.form-section-title:first-of-type {
+    margin-top: 0;
+}
+
+/* ---------------------------------------------------------------
+   VALIDATION ERROR LIST — register.php
+   Shown at the top of the form when fields fail validation.
+   --------------------------------------------------------------- */
+.error-list {
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: var(--space-lg);
+}
+
+.error-list p {
+    font-size: 13px;
+    font-weight: 600;
+    color: #b71c1c;
+    margin-bottom: 8px;
+}
+
+.error-list ul {
+    list-style: disc;
+    padding-left: 18px;
+}
+
+.error-list ul li {
+    font-size: 13px;
+    color: #b71c1c;
+    margin-bottom: 4px;
+}
+
+/* ---------------------------------------------------------------
+   SUCCESS STATE — register.php
+   Replaces the form after a successful registration submission.
+   --------------------------------------------------------------- */
+.success-box {
+    text-align: center;
+    padding: var(--space-xl) 0;
+}
+
+.success-box i {
+    font-size: 56px;
+    color: var(--color-success);
+    margin-bottom: var(--space-md);
+}
+
+.success-box h3 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+}
+
+.success-box p {
+    font-size: 14px;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-lg);
+}
+
+/* ---------------------------------------------------------------
+   FORM FOOTER ROW — register.php
+   Submit button on the right, "back to login" link on the left.
+   --------------------------------------------------------------- */
+.form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    gap: var(--space-md);
+}
+
+.form-footer__note {
+    font-size: 13px;
+    color: var(--color-text-light);
+}
+
+.form-footer__note a {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.form-footer__note a:hover {
+    text-decoration: underline;
+}
+
+
 /* Mobile: vertical stack, simplified nav */
 @media (max-width: 768px) {
     .header__inner {
@@ -915,5 +1303,40 @@ button {
     .navbar__link {
         padding: 12px 12px;
         font-size: 11px;
+    }
+
+    /* Auth pages — stack the two columns on mobile */
+    .auth-card {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-col:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .auth-col {
+        padding: 36px 28px;
+    }
+
+    /* Register card — reduce padding on small screens */
+    .register-card {
+        padding: 36px 24px;
+    }
+
+    /* Stack the two-column field rows vertically on mobile */
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* Genre grid goes from 3 columns to 2 on mobile */
+    .genre-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Stack the form footer vertically on mobile */
+    .form-footer {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
