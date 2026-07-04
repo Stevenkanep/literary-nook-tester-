@@ -3,7 +3,7 @@
    File: css/styles.css
  
    - Brand colors: Forest and moss greens (#3E6B3A, #2F4D2B) with parchment and stone neutrals
-   - Typography: Whimsical book‑inspired fonts (Cinzel Decorative + Quicksand)
+   - Typography: Orelega One (headings) + Quicksand (subheadings + body)
    - Backgrounds: Soft parchment and moss with earthy accents
    
    NOTE: This is the base stylesheet. As more pages are added,
@@ -24,8 +24,8 @@
     --color-success:       #4C9A57;   /* Vibrant leaf — confirmation / success feedback */
 
     /* Typography */
-    --font-heading: 'Cinzel Decorative', serif;   /* Elegant, classic headings */
-    --font-body:    'Quicksand', sans-serif;      /* Rounded, friendly body text */
+    --font-heading: 'Orelega One', serif;    /* Headings — warm, editorial character */
+    --font-body:    'Quicksand', sans-serif; /* Subheadings + body — rounded, friendly */
 
     /* Spacing */
     --space-xs:   4px;
@@ -870,13 +870,12 @@ button {
 
 /* ================================================================
    AUTH PAGES — login.php and register.php
-   Shared styles for the login and registration pages.
    ================================================================ */
 
 /* ---------------------------------------------------------------
    AUTH WRAPPER
-   Full-height centered container that sits between header and footer.
-   Used on both login.php and register.php.
+   Full-height background area between header and footer.
+   Centers the card both horizontally and vertically.
    --------------------------------------------------------------- */
 .auth-wrapper {
     background: var(--color-bg-soft);
@@ -884,12 +883,18 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-xl) var(--space-lg);
+    padding: 48px var(--space-lg);
+}
+
+/* register.php — top-align instead of center since the form is tall */
+.auth-wrapper--register {
+    align-items: flex-start;
 }
 
 /* ---------------------------------------------------------------
    AUTH CARD — login.php
-   Two-column split card: left = returning customers, right = new customers.
+   Wide two-column split card. Left = login, Right = new customers.
+   Keeping it wide so neither column feels squished.
    --------------------------------------------------------------- */
 .auth-card {
     background: var(--color-bg);
@@ -898,57 +903,65 @@ button {
     box-shadow: var(--shadow-card);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    max-width: 860px;
     width: 100%;
+    max-width: 1000px;   /* wide enough for both columns to breathe */
     overflow: hidden;
 }
 
-/* Each column inside the auth card */
+/* Each column — generous padding so content has room */
 .auth-col {
-    padding: 52px 48px;
+    padding: 56px 52px;
 }
 
-/* Divider line between the two columns */
+/* Vertical divider between the two columns */
 .auth-col:first-child {
     border-right: 1px solid var(--color-border);
 }
 
-/* Column heading (e.g. "Returning Customers") */
+/* ---------------------------------------------------------------
+   COLUMN HEADINGS
+   Only the main column title uses Cinzel Decorative.
+   Subtitle and all other text use Quicksand (var(--font-body)).
+   --------------------------------------------------------------- */
 .auth-col__title {
-    font-family: var(--font-heading);
+    font-family: var(--font-heading);   /* Cinzel Decorative — heading only */
     font-size: 20px;
     font-weight: 700;
     color: var(--color-text);
     margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
-/* Instruction text below the column heading */
+/* Subtitle uses body font — lighter, friendlier */
 .auth-col__subtitle {
+    font-family: var(--font-body);
     font-size: 13px;
     color: var(--color-text-light);
     margin-bottom: var(--space-lg);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 /* ---------------------------------------------------------------
-   AUTH NOTICE BOX
-   Soft info banner inside the login form column.
-   Example: "Reset your password to log in on the new site."
+   NOTICE BOX
+   Soft info banner at the top of the login form column.
    --------------------------------------------------------------- */
 .auth-notice {
     background: var(--color-bg-soft);
     border-left: 3px solid var(--color-primary);
     border-radius: var(--radius-sm);
     padding: 12px 16px;
+    font-family: var(--font-body);      /* body font — readable, not decorative */
     font-size: 13px;
     color: var(--color-text);
     margin-bottom: var(--space-lg);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 /* ---------------------------------------------------------------
    FORM ELEMENTS
-   Shared input labels, fields, and hints used on login and register.
+   Labels, inputs, hints — all use body font (Quicksand).
+   Only submit buttons use the heading font via .btn.
    --------------------------------------------------------------- */
 .form-group {
     margin-bottom: var(--space-md);
@@ -956,14 +969,13 @@ button {
 
 .form-label {
     display: block;
-    font-family: var(--font-body);
+    font-family: var(--font-body);      /* Quicksand — clear and readable */
     font-size: 13px;
     font-weight: 600;
     color: var(--color-text);
     margin-bottom: 6px;
 }
 
-/* Red asterisk for required fields */
 .form-label .required {
     color: var(--color-primary);
     margin-left: 2px;
@@ -974,7 +986,7 @@ button {
     padding: 11px 14px;
     border: 1.5px solid var(--color-border);
     border-radius: var(--radius-sm);
-    font-family: var(--font-body);
+    font-family: var(--font-body);      /* Quicksand — consistent with labels */
     font-size: 14px;
     color: var(--color-text);
     background: var(--color-bg);
@@ -987,14 +999,15 @@ button {
     box-shadow: 0 0 0 3px rgba(62, 107, 58, 0.12);
 }
 
-/* Small helper text below an input (e.g. password requirements) */
+/* Small helper text below inputs */
 .form-hint {
+    font-family: var(--font-body);
     font-size: 11px;
     color: var(--color-text-light);
     margin-top: 5px;
 }
 
-/* Two-column side-by-side field layout (e.g. First Name / Last Name) */
+/* Two-column row for paired fields (e.g. First / Last Name) */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1002,15 +1015,15 @@ button {
 }
 
 /* ---------------------------------------------------------------
-   PASSWORD FIELD WITH SHOW/HIDE TOGGLE
-   Wraps the input and positions the eye icon button inside it.
+   PASSWORD SHOW/HIDE TOGGLE
+   Eye icon button positioned inside the password input.
    --------------------------------------------------------------- */
 .input-password-wrap {
     position: relative;
 }
 
 .input-password-wrap .form-input {
-    padding-right: 44px; /* room for the eye icon */
+    padding-right: 44px;
 }
 
 .password-toggle {
@@ -1033,11 +1046,12 @@ button {
 
 /* ---------------------------------------------------------------
    FORM FEEDBACK MESSAGES
-   Shown after form submission — red for errors, green for success.
+   Error = red tint / Success = green tint
    --------------------------------------------------------------- */
 .form-message {
     padding: 11px 14px;
     border-radius: var(--radius-sm);
+    font-family: var(--font-body);
     font-size: 13px;
     margin-bottom: var(--space-md);
     font-weight: 500;
@@ -1057,7 +1071,7 @@ button {
 
 /* ---------------------------------------------------------------
    LOGIN FORM ACTIONS ROW
-   Login button on the left, Forgot Password link on the right.
+   Login button left, Forgot Password link right.
    --------------------------------------------------------------- */
 .form-actions {
     display: flex;
@@ -1067,8 +1081,8 @@ button {
     gap: var(--space-md);
 }
 
-/* Forgot password link style */
 .forgot-link {
+    font-family: var(--font-body);      /* body font — not decorative */
     font-size: 13px;
     font-weight: 600;
     color: var(--color-primary);
@@ -1082,7 +1096,7 @@ button {
 
 /* ---------------------------------------------------------------
    NEW CUSTOMERS COLUMN — login.php right side
-   Benefits checklist and Create Account CTA.
+   Vertically centered, benefits list, and CTA button.
    --------------------------------------------------------------- */
 .auth-col--new {
     display: flex;
@@ -1090,16 +1104,17 @@ button {
     justify-content: center;
 }
 
-/* List of account benefits shown to new visitors */
+/* Benefits list */
 .new-customer-benefits {
     list-style: none;
     margin-bottom: var(--space-lg);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .new-customer-benefits li {
+    font-family: var(--font-body);      /* body font — readable list items */
     font-size: 13px;
     color: var(--color-text-light);
     display: flex;
@@ -1107,56 +1122,51 @@ button {
     gap: 10px;
 }
 
-/* Green checkmark icon next to each benefit item */
 .new-customer-benefits li i {
     color: var(--color-primary);
-    font-size: 14px;
+    font-size: 15px;
     flex-shrink: 0;
 }
 
 /* ================================================================
-   REGISTER PAGE — register.php
-   Single centered card with three form sections.
+   REGISTER CARD — register.php
+   Single wide card with three form sections.
    ================================================================ */
-
-/* register.php wrapper overrides center-align to flex-start so
-   the card sits at the top on long pages rather than dead center */
-.auth-wrapper--register {
-    align-items: flex-start;
-}
-
-/* The main registration card */
 .register-card {
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
-    max-width: 720px;
+    max-width: 780px;
     width: 100%;
-    padding: 52px 56px;
+    padding: 56px 64px;
 }
 
-/* Page heading inside the card */
+/* Page heading — Cinzel Decorative for the main title only */
 .register-card__title {
     font-family: var(--font-heading);
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     margin-bottom: var(--space-xs);
 }
 
+/* Subtitle — body font, lighter */
 .register-card__subtitle {
+    font-family: var(--font-body);
     font-size: 13px;
-    color: var(--color-text-light);
+    color: var(--color-primary);
     margin-bottom: var(--space-xl);
 }
 
-/* Section divider labels inside the form (e.g. "Personal Information") */
+/* Section dividers inside the form (Personal Info / Security / Preferences) */
 .form-section-title {
-    font-family: var(--font-heading);
-    font-size: 12px;
+    font-family: var(--font-heading);   /* Cinzel Decorative — section label only */
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-primary);
     border-bottom: 1.5px solid var(--color-border);
@@ -1170,8 +1180,34 @@ button {
 }
 
 /* ---------------------------------------------------------------
+   GENRE CHECKBOXES — register.php Preferences section
+   --------------------------------------------------------------- */
+.genre-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px var(--space-md);
+}
+
+.genre-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-text);
+}
+
+.genre-option input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------
    VALIDATION ERROR LIST — register.php
-   Shown at the top of the form when fields fail validation.
    --------------------------------------------------------------- */
 .error-list {
     background: #fdecea;
@@ -1182,6 +1218,7 @@ button {
 }
 
 .error-list p {
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 600;
     color: #b71c1c;
@@ -1194,6 +1231,7 @@ button {
 }
 
 .error-list ul li {
+    font-family: var(--font-body);
     font-size: 13px;
     color: #b71c1c;
     margin-bottom: 4px;
@@ -1201,7 +1239,7 @@ button {
 
 /* ---------------------------------------------------------------
    SUCCESS STATE — register.php
-   Replaces the form after a successful registration submission.
+   Replaces the form after successful registration.
    --------------------------------------------------------------- */
 .success-box {
     text-align: center;
@@ -1222,6 +1260,7 @@ button {
 }
 
 .success-box p {
+    font-family: var(--font-body);
     font-size: 14px;
     color: var(--color-text-light);
     margin-bottom: var(--space-lg);
@@ -1229,7 +1268,7 @@ button {
 
 /* ---------------------------------------------------------------
    FORM FOOTER ROW — register.php
-   Submit button on the right, "back to login" link on the left.
+   Submit button right, back-to-login link left.
    --------------------------------------------------------------- */
 .form-footer {
     display: flex;
@@ -1242,6 +1281,7 @@ button {
 }
 
 .form-footer__note {
+    font-family: var(--font-body);
     font-size: 13px;
     color: var(--color-text-light);
 }
@@ -1303,40 +1343,5 @@ button {
     .navbar__link {
         padding: 12px 12px;
         font-size: 11px;
-    }
-
-    /* Auth pages — stack the two columns on mobile */
-    .auth-card {
-        grid-template-columns: 1fr;
-    }
-
-    .auth-col:first-child {
-        border-right: none;
-        border-bottom: 1px solid var(--color-border);
-    }
-
-    .auth-col {
-        padding: 36px 28px;
-    }
-
-    /* Register card — reduce padding on small screens */
-    .register-card {
-        padding: 36px 24px;
-    }
-
-    /* Stack the two-column field rows vertically on mobile */
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    /* Genre grid goes from 3 columns to 2 on mobile */
-    .genre-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* Stack the form footer vertically on mobile */
-    .form-footer {
-        flex-direction: column;
-        align-items: flex-start;
     }
 }
