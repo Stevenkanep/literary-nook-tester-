@@ -56,8 +56,8 @@ $nav_links = ["Books", "Non Books", "Bestsellers", "Collections", "Book Reviews"
     <!-- Page title — changes per page in the real system -->
     <title>The Literary Nook</title>
 
-    <!-- Google Fonts: Cinzel Decorative (headings) + Quicksand (body) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Orelega One (headings) + Quicksand (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
