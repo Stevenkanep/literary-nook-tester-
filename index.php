@@ -12,13 +12,6 @@
  */
 
 // -------------------------------------------------------
-// SESSION START
-// Used later for login/cart functionality.
-// For now, it's just initialized here so we don't break anything later.
-// -------------------------------------------------------
-session_start();
-
-// -------------------------------------------------------
 // PLACEHOLDER: Simulated "is user logged in?" check.
 // In the real system, this will check the session after DB login.
 // Replace this with: $is_logged_in = isset($_SESSION['customer_id']);
@@ -42,125 +35,10 @@ $featured_books = [
     ["title" => "Intermezzo",            "author" => "Sally Rooney",     "price" => 530.00, "badge" => "New",        "img" => "placeholder_book.jpg"],
 ];
 
-// -------------------------------------------------------
-// PLACEHOLDER: Hardcoded nav categories.
-// In the real system these can be fetched from a 'categories' table.
-// -------------------------------------------------------
-$nav_links = ["Books", "Non Books", "Bestsellers", "Collections", "Book Reviews", "New!", "Pre-Orders", "Sale"];
+// Page title for this page — read by includes/header.php
+$page_title = "The Literary Nook";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Page title — changes per page in the real system -->
-    <title>The Literary Nook</title>
-
-    <!-- Google Fonts: Orelega One (headings) + Quicksand (body) -->
-    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-
-<!-- ============================================================
-     TOP BAR
-     The thin strip above the main header.
-     Shows free shipping info + utility links (Blog, Store Locator, etc.)
-     ============================================================ -->
-<div class="top-bar">
-    <div class="top-bar__left">
-        <!-- Promotional message — can be pulled from a CMS/settings table later -->
-        Free shipping for minimum order of <strong>Php799</strong>.
-    </div>
-    <div class="top-bar__right">
-        <!-- Utility links — static for now, can become dynamic CMS links -->
-        <a href="#">Bulk Purchase</a>
-        <a href="#">Discount Card</a>
-        <a href="#">Blog</a>
-        <a href="#">Store Locator</a>
-        <a href="#">Help <i class="fas fa-chevron-down fa-xs"></i></a>
-    </div>
-</div><!-- /top-bar -->
-
-
-<!-- ============================================================
-     MAIN HEADER
-     Contains: Logo | Search Bar | User actions (Login, Wishlist, Cart)
-     ============================================================ -->
-<header class="header">
-    <div class="header__inner">
-
-        <!-- Logo — links to homepage -->
-        <a href="index.php" class="header__logo">
-            <!-- PLACEHOLDER: Replace with actual logo image if available -->
-            <!-- <img src="assets/logo.png" alt="The Literary Nook"> -->
-            <span class="logo-text">THE LITERARY NOOK</span>
-        </a>
-
-        <!-- Search bar — form action points to search.php (to be created) -->
-        <form class="header__search" action="search.php" method="GET">
-            <input type="text" name="q" placeholder="Search The Literary Nook" />
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
-
-        <!-- Right-side icon actions: Login, Wishlist, Cart -->
-        <div class="header__actions">
-
-            <!-- Login / Profile link -->
-            <!-- PLACEHOLDER: If logged in, show customer name; if not, show Login/Register -->
-            <?php if ($is_logged_in): ?>
-                <a href="account.php" class="action-link">
-                    <i class="fas fa-user"></i>
-                    <span><?php echo htmlspecialchars($customer_name); ?></span>
-                </a>
-            <?php else: ?>
-                <a href="login.php" class="action-link">
-                    <i class="fas fa-user"></i>
-                    <span>Login/Register</span>
-                </a>
-            <?php endif; ?>
-
-            <!-- Wishlist link — requires login in the full system -->
-            <!-- See: Section 1.2 Customer Profiles > Wishlist -->
-            <a href="wishlist.php" class="action-link">
-                <i class="fas fa-heart"></i>
-                <span>Wishlist</span>
-            </a>
-
-            <!-- Cart icon with item count badge -->
-            <!-- PLACEHOLDER: Cart count will come from $_SESSION['cart_count'] or DB -->
-            <a href="cart.php" class="action-link cart-link">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Cart</span>
-                <!-- Item count badge — 0 for now; will be dynamic -->
-                <span class="cart-badge">0</span>
-            </a>
-
-        </div><!-- /header__actions -->
-    </div><!-- /header__inner -->
-</header><!-- /header -->
-
-
-<!-- ============================================================
-     NAVIGATION BAR
-     Main category navigation strip — orange background, white text.
-     Each link will eventually point to category/filter pages.
-     ============================================================ -->
-<nav class="navbar">
-    <ul class="navbar__list">
-        <?php foreach ($nav_links as $link): ?>
-            <!-- PLACEHOLDER: href="#" — real links will go to category.php?slug=books etc. -->
-            <li class="navbar__item">
-                <a href="#" class="navbar__link"><?php echo $link; ?></a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</nav><!-- /navbar -->
+<?php require 'includes/header.php'; ?>
 
 
 <!-- ============================================================
@@ -317,85 +195,7 @@ $nav_links = ["Books", "Non Books", "Bestsellers", "Collections", "Book Reviews"
 </section><!-- /bestsellers -->
 
 
-<!-- ============================================================
-     FOOTER
-     Contains: logo, nav columns, copyright
-     PLACEHOLDER: Newsletter form will tie into email notifications (Section 5)
-     ============================================================ -->
-<footer class="footer">
-    <div class="footer__top">
-        <div class="container footer__grid">
-
-            <!-- Footer brand column -->
-            <div class="footer__col footer__col--brand">
-                <span class="logo-text logo-text--footer">THE LITERARY NOOK</span>
-                <p class="footer__tagline">Your cozy corner for every story.</p>
-                <!-- Social icons — PLACEHOLDER: links to social pages -->
-                <div class="footer__socials">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-
-            <!-- Footer nav column: Shop -->
-            <div class="footer__col">
-                <h4 class="footer__col-title">Shop</h4>
-                <ul class="footer__col-links">
-                    <li><a href="#">Books</a></li>
-                    <li><a href="#">Non Books</a></li>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="#">Bestsellers</a></li>
-                    <li><a href="#">Sale</a></li>
-                </ul>
-            </div>
-
-            <!-- Footer nav column: Account -->
-            <div class="footer__col">
-                <h4 class="footer__col-title">My Account</h4>
-                <ul class="footer__col-links">
-                    <!-- These pages will be built in later sprints -->
-                    <li><a href="login.php">Login / Register</a></li>
-                    <li><a href="account.php">My Profile</a></li>
-                    <li><a href="orders.php">Order History</a></li>
-                    <li><a href="wishlist.php">Wishlist</a></li>
-                </ul>
-            </div>
-
-            <!-- Footer nav column: Help -->
-            <div class="footer__col">
-                <h4 class="footer__col-title">Help</h4>
-                <ul class="footer__col-links">
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Shipping Policy</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Store Locator</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <!-- Newsletter signup — ties into Section 5: Email Notifications -->
-            <div class="footer__col footer__col--newsletter">
-                <h4 class="footer__col-title">Stay in the Loop</h4>
-                <p>Get notified about new arrivals and exclusive deals.</p>
-                <!-- PLACEHOLDER: This form will POST to newsletter.php or an email handler -->
-                <form class="newsletter-form" action="newsletter.php" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required>
-                    <button type="submit" class="btn btn--primary">Subscribe</button>
-                </form>
-            </div>
-
-        </div><!-- /footer__grid -->
-    </div><!-- /footer__top -->
-
-    <!-- Bottom bar with copyright -->
-    <div class="footer__bottom">
-        <div class="container">
-            <p>&copy; <?php echo date('Y'); ?> The Literary Nook. All rights reserved.</p>
-            <p>Built on XAMPP (localhost) — switch to a live server for production deployment.</p>
-        </div>
-    </div>
-</footer><!-- /footer -->
+<?php require 'includes/footer.php'; ?>
 
 
 <!-- ============================================================
