@@ -9,9 +9,11 @@
  * NOTE: No real DB insertion yet. Submission handling is placeholder only.
  * In production, validated data will be inserted into the customers table via XAMPP MySQL.
  * Use password_hash() before storing the password — never store plain text.
+ *
+ * NOTE: session_start() is called inside includes/header.php, which this
+ * file requires further down. This page doesn't touch $_SESSION before
+ * that point, so it doesn't need its own separate session_start() call.
  */
-
-session_start();
 
 // -------------------------------------------------------
 // PLACEHOLDER: Redirect if already logged in.
@@ -59,89 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     }
 }
 
-$nav_links = ["Books", "Non Books", "Bestsellers", "Collections", "Book Reviews", "New!", "Pre-Orders", "Sale"];
+// Page title for this page — read by includes/header.php
+$page_title = "Create Account - The Literary Nook";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account - The Literary Nook</title>
-
-    <!-- Google Fonts: Orelega One (headings) + Quicksand (body) -->
-    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- Shared stylesheet -->
-    <link rel="stylesheet" href="css/styles.css">
-
-</head>
-<body>
-
-<!-- ============================================================
-     TOP BAR - reused from index.php
-     ============================================================ -->
-<div class="top-bar">
-    <div class="top-bar__left">
-        Free shipping for minimum order of <strong>Php799</strong>.
-    </div>
-    <div class="top-bar__right">
-        <a href="#">Bulk Purchase</a>
-        <a href="#">Discount Card</a>
-        <a href="#">Blog</a>
-        <a href="#">Store Locator</a>
-        <a href="#">Help <i class="fas fa-chevron-down fa-xs"></i></a>
-    </div>
-</div>
-
-
-<!-- ============================================================
-     HEADER - reused from index.php
-     ============================================================ -->
-<header class="header">
-    <div class="header__inner">
-        <a href="index.php" class="header__logo">
-            <span class="logo-text">THE LITERARY NOOK</span>
-        </a>
-
-        <form class="header__search" action="search.php" method="GET">
-            <input type="text" name="q" placeholder="Search The Literary Nook" />
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
-
-        <div class="header__actions">
-            <a href="login.php" class="action-link">
-                <i class="fas fa-user"></i>
-                <span>Login/Register</span>
-            </a>
-            <a href="wishlist.php" class="action-link">
-                <i class="fas fa-heart"></i>
-                <span>Wishlist</span>
-            </a>
-            <a href="cart.php" class="action-link cart-link">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Cart</span>
-                <span class="cart-badge">0</span>
-            </a>
-        </div>
-    </div>
-</header>
-
-
-<!-- ============================================================
-     NAVBAR - reused from index.php
-     ============================================================ -->
-<nav class="navbar">
-    <ul class="navbar__list">
-        <?php foreach ($nav_links as $link): ?>
-            <li class="navbar__item">
-                <a href="#" class="navbar__link"><?php echo $link; ?></a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</nav>
+<?php require 'includes/header.php'; ?>
 
 
 <!-- ============================================================
@@ -347,67 +270,7 @@ $nav_links = ["Books", "Non Books", "Bestsellers", "Collections", "Book Reviews"
 </main><!-- /auth-wrapper -->
 
 
-<!-- ============================================================
-     FOOTER - reused from index.php
-     ============================================================ -->
-<footer class="footer">
-    <div class="footer__top">
-        <div class="container footer__grid">
-            <div class="footer__col footer__col--brand">
-                <span class="logo-text logo-text--footer">THE LITERARY NOOK</span>
-                <p class="footer__tagline">Your cozy corner for every story.</p>
-                <div class="footer__socials">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-            <div class="footer__col">
-                <h4 class="footer__col-title">Shop</h4>
-                <ul class="footer__col-links">
-                    <li><a href="#">Books</a></li>
-                    <li><a href="#">Non Books</a></li>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="#">Bestsellers</a></li>
-                    <li><a href="#">Sale</a></li>
-                </ul>
-            </div>
-            <div class="footer__col">
-                <h4 class="footer__col-title">My Account</h4>
-                <ul class="footer__col-links">
-                    <li><a href="login.php">Login / Register</a></li>
-                    <li><a href="account.php">My Profile</a></li>
-                    <li><a href="orders.php">Order History</a></li>
-                    <li><a href="wishlist.php">Wishlist</a></li>
-                </ul>
-            </div>
-            <div class="footer__col">
-                <h4 class="footer__col-title">Help</h4>
-                <ul class="footer__col-links">
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Shipping Policy</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Store Locator</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer__col footer__col--newsletter">
-                <h4 class="footer__col-title">Stay in the Loop</h4>
-                <p>Get notified about new arrivals and exclusive deals.</p>
-                <form class="newsletter-form" action="newsletter.php" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required>
-                    <button type="submit" class="btn btn--primary">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="footer__bottom">
-        <div class="container">
-            <p>&copy; <?php echo date('Y'); ?> The Literary Nook. All rights reserved.</p>
-            <p>Built on XAMPP (localhost) - switch to a live server for production deployment.</p>
-        </div>
-    </div>
-</footer>
+<?php require 'includes/footer.php'; ?>
 
 
 <!-- ============================================================
